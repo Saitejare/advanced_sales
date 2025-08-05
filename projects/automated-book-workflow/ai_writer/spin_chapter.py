@@ -2,7 +2,9 @@ import os
 import requests
 from dotenv import load_dotenv
 
-api_key = "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"
+from dotenv import load_dotenv
+load_dotenv()
+api_key = os.getenv("GROQ_API_KEY")
 
 CHAPTER_PATH = os.path.join("output", "chapter.txt")
 SPUN_PATH = os.path.join("output", "chapter_spun.txt")
