@@ -2,10 +2,10 @@ import os
 import pandas as pd
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-df = pd.read_csv(os.path.join(BASE_DIR, "engineered_data.csv"))
-
 
 def generate_insights():
+    df = pd.read_csv(os.path.join(BASE_DIR, "engineered_data.csv"),
+                     usecols=["Sales", "Profit", "Month", "Region"])
 
     insights = []
 
