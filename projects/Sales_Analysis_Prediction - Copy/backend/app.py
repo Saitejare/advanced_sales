@@ -1,4 +1,7 @@
-from flask import Flask,request,jsonify
+
+
+import os
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import joblib
 import numpy as np
@@ -7,16 +10,18 @@ import pandas as pd
 from advisor import generate_insights
 
 app = Flask(__name__)
+
 CORS(app)
 
-sales = joblib.load(r"B:\projects\Sales_Analysis_Prediction - Copy\backend\sales.pkl")
-demand = joblib.load(r"B:\projects\Sales_Analysis_Prediction - Copy\backend\demand.pkl")
-profit = joblib.load(r"B:\projects\Sales_Analysis_Prediction - Copy\backend\profit.pkl")
-scaler = joblib.load(r"B:\projects\Sales_Analysis_Prediction - Copy\backend\scaler.pkl")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-rules = pd.read_csv(r"B:\projects\Sales_Analysis_Prediction - Copy\backend\rules.csv")
-df = pd.read_csv(r"B:\projects\Sales_Analysis_Prediction - Copy\backend\engineered_data.csv")
+sales = joblib.load(os.path.join(BASE_DIR, "sales.pkl"))
+demand = joblib.load(os.path.join(BASE_DIR, "demand.pkl"))
+profit = joblib.load(os.path.join(BASE_DIR, "profit.pkl"))
+scaler = joblib.load(os.path.join(BASE_DIR, "scaler.pkl"))
 
+rules = pd.read_csv(os.path.join(BASE_DIR, "rules.csv"))
+df = pd.read_csv(os.path.join(BASE_DIR, "engineered_data.csv"))
 
 @app.route("/")
 def home():
